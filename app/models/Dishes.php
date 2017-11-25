@@ -22,7 +22,7 @@ class Dishes extends \Phalcon\Mvc\Model
     /**
      *
      * @var integer
-     * @Column(type="integer", length=4, nullable=false)
+     * @Column(type="integer", length=1, nullable=true)
      */
     protected $takeaway;
 

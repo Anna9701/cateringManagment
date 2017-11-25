@@ -3,22 +3,26 @@
  * @var \Phalcon\Mvc\View\Engine\Php $this
  */
 ?>
+    <div class="row">
+        <nav>
+            <ul class="pager">
+                <li class="previous"><?php echo $this->tag->linkTo(["clients", "Back"]) ?></li>
+            </ul>
+        </nav>
+    </div>
 
     <div class="page-header">
         <h1>
-            Clients
+            Edit client
         </h1>
-        <p>
-            <?php echo $this->tag->linkTo(["clients/new", "Create clients"]) ?>
-        </p>
     </div>
 
-<?php echo $this->getContent() ?>
+<?php echo $this->getContent(); ?>
 
 <?php
 echo $this->tag->form(
     [
-        "clients/search",
+        "clients/save",
         "autocomplete" => "off",
         "class" => "form-horizontal"
     ]
@@ -26,30 +30,25 @@ echo $this->tag->form(
 ?>
 
     <div class="form-group">
-        <label for="fieldId" class="col-sm-2 control-label">Id</label>
-        <div class="col-sm-10">
-            <?php echo $this->tag->textField(["Id", "type" => "number", "class" => "form-control", "id" => "fieldId"]) ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="fieldFirstName" class="col-sm-2 control-label">First name</label>
+        <label for="fieldFirstName" class="col-sm-2 control-label">First Name</label>
         <div class="col-sm-10">
             <?php echo $this->tag->textField(["FirstName", "size" => 30, "class" => "form-control", "id" => "fieldFirstName"]) ?>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="fieldLastName" class="col-sm-2 control-label">Last name</label>
+        <label for="fieldLastName" class="col-sm-2 control-label">Last Name</label>
         <div class="col-sm-10">
             <?php echo $this->tag->textField(["LastName", "size" => 30, "class" => "form-control", "id" => "fieldLastName"]) ?>
         </div>
     </div>
 
 
+<?php echo $this->tag->hiddenField("id") ?>
+
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?php echo $this->tag->submitButton(["Search", "class" => "btn btn-default"]) ?>
+            <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
         </div>
     </div>
 

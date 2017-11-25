@@ -39,6 +39,7 @@ class CateringsController extends \Phalcon\Mvc\Controller
         }
         // $parameters["order"] = "Id";
        // var_dump($parameters);
+
         $caterings = Caterings::find($parameters);
         if (count($caterings) == 0) {
             $this->flash->notice("Did not find any caterings");
