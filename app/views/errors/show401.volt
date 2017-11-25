@@ -1,3 +1,4 @@
+<div class=top><?php $this->partial("shared/ad_navbar"); ?></div>
 {{ content() }}
 
 <div class="jumbotron">

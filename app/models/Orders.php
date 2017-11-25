@@ -312,7 +312,7 @@ class Orders extends \Phalcon\Mvc\Model
     {
         $this->setSchema("catering");
         $this->setSource("orders");
-        $this->hasMany('id', 'Dishes', 'orderId', ['alias' => 'Dishes']);
+        $this->hasMany('id', 'Dishorders', 'orderId', ['alias' => 'Dishorders']);
         $this->belongsTo('cateringId', '\Caterings', 'id', ['alias' => 'Caterings']);
         $this->belongsTo('clientId', '\Clients', 'id', ['alias' => 'Clients']);
         $this->belongsTo('placeId', '\Places', 'id', ['alias' => 'Places']);

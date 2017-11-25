@@ -14,13 +14,6 @@ class Dishes extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
-     */
-    protected $orderId;
-
-    /**
-     *
      * @var string
      * @Column(type="string", length=255, nullable=false)
      */
@@ -42,19 +35,6 @@ class Dishes extends \Phalcon\Mvc\Model
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Method to set the value of field orderId
-     *
-     * @param integer $orderId
-     * @return $this
-     */
-    public function setOrderId($orderId)
-    {
-        $this->orderId = $orderId;
 
         return $this;
     }
@@ -96,16 +76,6 @@ class Dishes extends \Phalcon\Mvc\Model
     }
 
     /**
-     * Returns the value of field orderId
-     *
-     * @return integer
-     */
-    public function getOrderId()
-    {
-        return $this->orderId;
-    }
-
-    /**
      * Returns the value of field name
      *
      * @return string
@@ -132,8 +102,8 @@ class Dishes extends \Phalcon\Mvc\Model
     {
         $this->setSchema("catering");
         $this->setSource("dishes");
+        $this->hasMany('id', 'Dishorders', 'dishId', ['alias' => 'Dishorders']);
         $this->hasMany('id', 'Ingredients', 'dishId', ['alias' => 'Ingredients']);
-        $this->belongsTo('orderId', '\Orders', 'id', ['alias' => 'Orders']);
     }
 
     /**
