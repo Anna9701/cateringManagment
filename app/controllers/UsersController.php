@@ -99,7 +99,7 @@ class UsersController extends ControllerBase
     {
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([
-                'controller' => "users",
+                'controller' => "index",
                 'action' => 'index'
             ]);
 
@@ -114,7 +114,7 @@ class UsersController extends ControllerBase
         // var_dump($user);
         // die;
         if (!$user->save()) {
-            var_dump($user->getMessages());die;
+      //      var_dump($user->getMessages());die;
             foreach ($user->getMessages() as $message) {
                 $this->flash->error($message);
             }
@@ -130,7 +130,7 @@ class UsersController extends ControllerBase
         $this->flash->success("user was created successfully");
 
         $this->dispatcher->forward([
-            'controller' => "users",
+            'controller' => "index",
             'action' => 'index'
         ]);
     }
