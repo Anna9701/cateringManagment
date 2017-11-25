@@ -1,6 +1,6 @@
 <?php
 
-class SessionController extends ControllerBase
+class SessionController extends \Phalcon\Mvc\Controller
 {
     public function indexAction()
     {

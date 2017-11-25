@@ -36,10 +36,9 @@ class SecurityPlugin extends Plugin
 			}
 			//Private area resources
 			$privateResources = [
-				'companies'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
-				'products'     => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
-				'producttypes' => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
-				'invoices'     => ['index', 'profile']
+				'caterings'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'list'],
+				'clients'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
+				'dishes'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete']
 			];
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
@@ -48,7 +47,7 @@ class SecurityPlugin extends Plugin
 			$publicResources = [
 				'index'      => ['index'],
                 'users'      => ['new', 'create', 'save'],
-				'errors'     => ['show401', 'show404', 'show500'],
+				'errors'     => ['index', 'show401', 'show404', 'show500'],
 				'session'    => ['index', 'register', 'start', 'logout', 'end'],
 			];
 			foreach ($publicResources as $resource => $actions) {
@@ -100,7 +99,7 @@ class SecurityPlugin extends Plugin
 				'controller' => 'errors',
 				'action'     => 'show401'
 			]);
-                        $this->session->destroy();
+            $this->session->destroy();
 			return false;
         }
     }

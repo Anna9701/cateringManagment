@@ -1,12 +1,13 @@
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header navbar-brand">
-        <?php echo Phalcon\Tag::linkTo("index", "Caterings managment"); ?>    
+<div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="~/index">Caterings managment</a>
     </div>
     <ul class="nav navbar-nav">
-
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
+      <li><?php echo Phalcon\Tag::linkTo("index", "Home"); ?></li>
+      <li><?php echo Phalcon\Tag::linkTo("caterings", "Caterings"); ?></li>
+      <li><?php echo Phalcon\Tag::linkTo("clients", "Clients"); ?></li>
+      <li><?php echo Phalcon\Tag::linkTo("dishes", "Dishes"); ?></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>
