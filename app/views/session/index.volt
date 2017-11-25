@@ -1,5 +1,3 @@
-<div class=top><?php $this->partial("shared/ad_navbar"); ?></div>
-
 <div class="row">
     <div class="col-md-6">
             <div class="page-header">
