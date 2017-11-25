@@ -20,6 +20,13 @@ class SessionController extends ControllerBase
 
     public function logoutAction() {
         $this->session->remove("auth");
+        return $this->dispatcher->forward(
+            [
+                "controller" => "index",
+                "action"     => "index",
+            ]
+        );
+
     }
 
     public function startAction()
