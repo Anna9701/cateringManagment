@@ -35,14 +35,7 @@ class DishesController extends \Phalcon\Mvc\Controller
 
         $ingredients = $dish->getIngredients();
         if (count($ingredients) == 0) {
-            $this->flash->notice("The search did not find any ingredients");
-
-            $this->dispatcher->forward([
-                "controller" => "dishes",
-                "action" => "index"
-            ]);
-
-            return;
+            $numberPage = 0;
         }
 
         $paginator = new Paginator([

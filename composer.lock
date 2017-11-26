@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "37600563534f5105f677e55db989b20c",
-    "content-hash": "11b33dc631cc69bd260d92dca6d4dc09",
+    "hash": "7ae9cd64320ccae2c70f9e82f4514845",
+    "content-hash": "50010d13a16971361b3f714b3c6af5cb",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -610,6 +610,57 @@
                 "dump"
             ],
             "time": "2017-11-07 14:16:22"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "4.0.0-alpha.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/65ffb1c3b6e94440812a2e228cb8e8be512652ec",
+                "reference": "65ffb1c3b6e94440812a2e228cb8e8be512652ec",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "https://getbootstrap.com",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "web"
+            ],
+            "time": "2017-01-06 16:41:52"
         }
     ],
     "packages-dev": [
@@ -661,7 +712,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "phalcon/devtools": 20
+        "phalcon/devtools": 20,
+        "twbs/bootstrap": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,
