@@ -287,6 +287,7 @@ class DishesController extends \Phalcon\Mvc\Controller
             return;
         }
 
+        $dish->getIngredients()->delete();
         if (!$dish->delete()) {
 
             foreach ($dish->getMessages() as $message) {

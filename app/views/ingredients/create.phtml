@@ -1,0 +1,24 @@
+<?php echo $this->getContent(); ?>
+
+<?php
+echo $this->tag->form(
+    [
+        "ingredients/add",
+        "autocomplete" => "off",
+        "class" => "form-horizontal"
+    ]
+);
+?>
+
+
+<?php $this->partial("ingredients/new"); ?>
+<?php echo $this->tag->hiddenField("Id") ?>
+<?php echo $this->tag->hiddenField("DishName")?>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-5">
+        <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->endForm(); ?>

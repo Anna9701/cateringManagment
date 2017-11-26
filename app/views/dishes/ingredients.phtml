@@ -3,7 +3,7 @@
         <ul class="pager">
             <li class="previous"><?php echo $this->tag->linkTo(["dishes/index", "Go Back"]); ?></li>
             <li class="next"> <?php
-                echo $this->tag->linkTo(["ingredients/new/" . $this->dispatcher->getParam(0), "Create "]); ?>
+                echo $this->tag->linkTo(["ingredients/create/" . $this->dispatcher->getParam(0), "Create "]); ?>
             </li>
         </ul>
     </nav>

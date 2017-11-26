@@ -39,7 +39,7 @@ class SecurityPlugin extends Plugin
 				'caterings'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'list'],
 				'clients'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'list'],
 				'dishes'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'ingredients', 'list'],
-                'ingredients' => ['new', 'delete', 'edit', 'save']
+                'ingredients' => ['new', 'add', 'delete', 'edit', 'save', 'create']
 			];
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);

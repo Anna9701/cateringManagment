@@ -15,7 +15,6 @@ class CateringsController extends \Phalcon\Mvc\Controller
      */
     public function newAction()
     {
-
     }
 
     /**
