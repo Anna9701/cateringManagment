@@ -26,7 +26,7 @@
         ?></dd>
         <dt>Places</dt>
         <dd><?php
-            $this->tag->linkTo(["clients/placesList/" . Clients::findFirst($this->dispatcher->getParam(0))->getId(), "Places"]);
+            echo $this->tag->linkTo(["clients/placesList/" . Clients::findFirst($this->dispatcher->getParam(0))->getId(), "List"]);
         ?></dd>
     </dl>
 </h4>
