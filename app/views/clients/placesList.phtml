@@ -2,13 +2,15 @@
     <nav>
         <ul class="pager">
             <li class="previous"><?php echo $this->tag->linkTo(["clients/index", "Go Back"]); ?></li>
-            <li class="next"><?php echo $this->tag->linkTo(["clients/new", "Create "]); ?></li>
+            <li class="next"> <?php
+                echo $this->tag->linkTo(["places/new/" . $this->dispatcher->getParam(0), "Create"]); ?>
+            </li>
         </ul>
     </nav>
 </div>
 
 <div class="page-header">
-    <h1>Clients</h1>
+    <h1>Places</h1>
 </div>
 
 <?php echo $this->getContent(); ?>
@@ -17,25 +19,23 @@
     <table class="table table-striped table-hover table-inverse table-responsive">
         <thead class="thead-inverse">
         <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th></th>
-            <th></th>
+            <th>Postal code</th>
+            <th>Address</th>
+            <th>Floor</th>
+            <th>Hall number</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($page->items as $client): ?>
+        <?php foreach ($page->items as $place): ?>
             <tr>
-                <td><?php echo $client->getId() ?></td>
-                <td><?php echo $client->getFirstName() ?></td>
-                <td><?php echo $client->getLastName() ?></td>
-                <td><?php echo $this->tag->linkTo(["clients/placesList/" . $client->getId(), "Places"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["clients/details/" . $client->getId(), "Details"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["clients/edit/" . $client->getId(), "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["clients/delete/" . $client->getId(), "Delete"]); ?></td>
+                <td><?php echo $place->getPostalCode() ?></td>
+                <td><?php echo $place->getAddress() ?></td>
+                <td><?php echo $place->getFloor() ?></td>
+                <td><?php echo $place->getHallNumber() ?></td>
+                <td><?php echo $this->tag->linkTo(["places/edit/" . $place->getId(), "Edit"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["places/delete/" . $place->getId(), "Delete"]); ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

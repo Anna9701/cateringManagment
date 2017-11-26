@@ -307,5 +307,41 @@ class ClientsController extends \Phalcon\Mvc\Controller
         ]);
     }
 
+    /**
+     * Searches for clients places
+     * @param string $Id
+     */
+    public function placesListAction($Id) {
+        $numberPage = 1;
+     //   $this->session->set("dishId", $Id);
+
+        if (!$this->request->isPost()) {
+
+            $client = Clients::findFirst($Id);
+            if (!$client) {
+                $this->flash->error("Client was not found");
+
+                $this->dispatcher->forward([
+                    'controller' => "clients",
+                    'action' => 'index'
+                ]);
+
+                return;
+            }
+        }
+
+        $places = $client->getPlaces();
+        if (count($places) == 0) {
+            $numberPage = 0;
+        }
+
+        $paginator = new Paginator([
+            'data' => $places,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
+    }
 }
 

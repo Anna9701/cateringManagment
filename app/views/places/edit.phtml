@@ -1,0 +1,68 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous"><?php echo $this->tag->linkTo(["clients", "Back"]) ?></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="page-header">
+    <h1>
+        Edit place
+    </h1>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<?php
+echo $this->tag->form(
+    [
+        "places/save",
+        "autocomplete" => "off",
+        "class" => "form-horizontal"
+    ]
+);
+?>
+
+<div class="form-group">
+    <label for="fieldCode" class="col-sm-2 control-label">Postal code</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["Code", "size" => 30, "class" => "form-control", "id" => "fieldCode"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldAddress" class="col-sm-2 control-label">Address</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["Address", "size" => 30, "class" => "form-control", "id" => "fieldAddress"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldFloor" class="col-sm-2 control-label">Floor</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->textField(["Floor", "size" => 30, "class" => "form-control", "id" => "fieldFloor"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldHall" class="col-sm-2 control-label">Hall number</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->textField(["Hall", "size" => 30, "class" => "form-control", "id" => "fieldHall"]) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->hiddenField("Id") ?>
+<?php echo $this->tag->hiddenField("ClientId") ?>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+        </div>
+    </div>
+
+<?php echo $this->tag->endForm(); ?>

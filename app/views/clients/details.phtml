@@ -24,5 +24,9 @@
         <dd><?php
             echo Clients::findFirst($this->dispatcher->getParam(0))->getContactData()[0]->getFax();
         ?></dd>
+        <dt>Places</dt>
+        <dd><?php
+            $this->tag->linkTo(["clients/placesList/" . Clients::findFirst($this->dispatcher->getParam(0))->getId(), "Places"]);
+        ?></dd>
     </dl>
 </h4>
