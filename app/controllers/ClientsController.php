@@ -17,19 +17,58 @@ class ClientsController extends \Phalcon\Mvc\Controller
     {
         $numberPage = 1;
         if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Clients', $_POST);
-            $this->persistent->parameters = $query->getParams();
+
         } else {
             $numberPage = $this->request->getQuery("page", "int");
         }
 
-        $parameters = $this->persistent->parameters;
-        if (!is_array($parameters)) {
-            $parameters = [];
+        $id = $this->request->getPost("Id");
+        $fistName = $this->request->getPost("FirstName");
+        $lastName = $this->request->getPost("LastName");
+
+        $clients = Clients::find(
+            [
+                "(id = :id:) OR first_name = :firstName: OR last_name = :lastName:",
+                "bind" => [
+                    "id"    => $id,
+                    "firstName" => $fistName,
+                    "lastName" => $lastName,
+                ]
+            ]
+        );
+        if (count($clients) == 0) {
+            $this->flash->notice("The search did not find any clients");
+
+            $this->dispatcher->forward([
+                "controller" => "clients",
+                "action" => "index"
+            ]);
+
+            return;
+        }
+
+        $paginator = new Paginator([
+            'data' => $clients,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
+    }
+
+    /**
+     * List all clients
+     */
+    public function listAction()
+    {
+        $numberPage = 1;
+        if (!$this->request->isPost()) {
+            $numberPage = $this->request->getQuery("page", "int");
         }
 
 
-        $clients = Clients::find($parameters);
+
+        $clients = Clients::find();
         if (count($clients) == 0) {
             $this->flash->notice("The search did not find any clients");
 

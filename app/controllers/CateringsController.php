@@ -20,29 +20,61 @@ class CateringsController extends \Phalcon\Mvc\Controller
 
     /**
      * Searches for caterings
-     * Doesnt work query->getParams
      */
     public function searchAction()
     {
         $numberPage = 1;
-        if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Caterings', $_POST);
-            $this->persistent->parameters = $query->getParams();
-        } else {
+        if (!$this->request->isPost()) {
             $numberPage = $this->request->getQuery("page", "int");
         }
 
-        $parameters = $this->persistent->parameters;
-        //var_dump($parameters);
-        if (!is_array($parameters)) {
-            $parameters = [];
-        }
-        // $parameters["order"] = "Id";
-       // var_dump($parameters);
+       $id = $this->request->getPost("Id");
+       $name = $this->request->getPost("Name");
 
-        $caterings = Caterings::find($parameters);
+        $caterings = Caterings::find(
+            [
+                "(id = :id:) OR name = :name:",
+                "bind" => [
+                    "id"    => $id,
+                    "name" => $name,
+                ]
+            ]
+        );
         if (count($caterings) == 0) {
             $this->flash->notice("Did not find any caterings");
+
+            $this->dispatcher->forward([
+                "controller" => "caterings",
+                "action" => "index"
+            ]);
+
+            return;
+        }
+
+        $paginator = new Paginator([
+            'data' => $caterings,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
+    }
+
+     /**
+     * List all clients
+     */
+    public function listAction()
+    {
+        $numberPage = 1;
+        if (!$this->request->isPost()) {
+            $numberPage = $this->request->getQuery("page", "int");
+        }
+
+
+
+        $caterings = Caterings::find();
+        if (count($caterings) == 0) {
+            $this->flash->notice("The search did not find any caterings");
 
             $this->dispatcher->forward([
                 "controller" => "caterings",

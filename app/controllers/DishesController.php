@@ -16,6 +16,7 @@ class DishesController extends \Phalcon\Mvc\Controller
      */
     public function ingredientsAction($Id) {
         $numberPage = 1;
+        $this->session->set("dishId", $Id);
 
         if (!$this->request->isPost()) {
 
@@ -59,20 +60,54 @@ class DishesController extends \Phalcon\Mvc\Controller
     public function searchAction()
     {
         $numberPage = 1;
-        if ($this->request->isPost()) {
-            $query = Criteria::fromInput($this->di, 'Dishes', $_POST);
-            $this->persistent->parameters = $query->getParams();
-        } else {
+        if (!$this->request->isPost()) {
             $numberPage = $this->request->getQuery("page", "int");
         }
 
-        $parameters = $this->persistent->parameters;
-        if (!is_array($parameters)) {
-            $parameters = [];
+        $id = $this->request->getPost("Id");
+        $name = $this->request->getPost("Name");
+
+        $dishes = Dishes::find(
+            [
+                "(id = :id:) OR name = :name:",
+                "bind" => [
+                    "id"    => $id,
+                    "name" => $name,
+                ]
+            ]
+        );
+
+        if (count($dishes) == 0) {
+            $this->flash->notice("Did not find any dishes");
+
+            $this->dispatcher->forward([
+                "controller" => "dishes",
+                "action" => "index"
+            ]);
+
+            return;
         }
 
+        $paginator = new Paginator([
+            'data' => $dishes,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
 
-        $dishes = Dishes::find($parameters);
+        $this->view->page = $paginator->getPaginate();
+    }
+
+    /**
+     * List all dishes
+     */
+    public function listAction()
+    {
+        $numberPage = 1;
+        if (!$this->request->isPost()) {
+            $numberPage = $this->request->getQuery("page", "int");
+        }
+
+        $dishes = Dishes::find();
         if (count($dishes) == 0) {
             $this->flash->notice("The search did not find any dishes");
 

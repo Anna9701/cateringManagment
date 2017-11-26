@@ -1,16 +1,14 @@
 <div class="row">
     <nav>
         <ul class="pager">
-            <li class="previous"><?php echo $this->tag->linkTo(["dishes/index", "Go Back"]); ?></li>
-            <li class="next"> <?php
-                echo $this->tag->linkTo(["ingredients/new/" . $this->dispatcher->getParam(0), "Create "]); ?>
-            </li>
+            <li class="previous"><?php echo $this->tag->linkTo(["clients/index", "Go Back"]); ?></li>
+            <li class="next"><?php echo $this->tag->linkTo(["clients/new", "Create "]); ?></li>
         </ul>
     </nav>
 </div>
 
 <div class="page-header">
-    <h1>Ingredients</h1>
+    <h1>Clients</h1>
 </div>
 
 <?php echo $this->getContent(); ?>
@@ -19,21 +17,21 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Amount Of</th>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($page->items as $ingredient): ?>
+        <?php foreach ($page->items as $client): ?>
             <tr>
-                <td><?php echo $ingredient->getName() ?></td>
-                <td><?php echo $ingredient->getPrice() ?></td>
-                <td><?php echo $ingredient->getAmountOf() ?></td>
-                <td><?php echo $this->tag->linkTo(["ingredients/edit/" . $ingredient->getId(), "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["ingredients/delete/" . $ingredient->getId(), "Delete"]); ?></td>
+                <td><?php echo $client->getId() ?></td>
+                <td><?php echo $client->getFirstName() ?></td>
+                <td><?php echo $client->getLastName() ?></td>
+                <td><?php echo $this->tag->linkTo(["clients/edit/" . $client->getId(), "Edit"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["clients/delete/" . $client->getId(), "Delete"]); ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

@@ -2,15 +2,13 @@
     <nav>
         <ul class="pager">
             <li class="previous"><?php echo $this->tag->linkTo(["dishes/index", "Go Back"]); ?></li>
-            <li class="next"> <?php
-                echo $this->tag->linkTo(["ingredients/new/" . $this->dispatcher->getParam(0), "Create "]); ?>
-            </li>
+            <li class="next"><?php echo $this->tag->linkTo(["dishes/new", "Create "]); ?></li>
         </ul>
     </nav>
 </div>
 
 <div class="page-header">
-    <h1>Ingredients</h1>
+    <h1>Dishes</h1>
 </div>
 
 <?php echo $this->getContent(); ?>
@@ -19,21 +17,21 @@
     <table class="table table-bordered">
         <thead>
         <tr>
+            <th>Id</th>
             <th>Name</th>
-            <th>Price</th>
-            <th>Amount Of</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($page->items as $ingredient): ?>
+        <?php foreach ($page->items as $dish): ?>
             <tr>
-                <td><?php echo $ingredient->getName() ?></td>
-                <td><?php echo $ingredient->getPrice() ?></td>
-                <td><?php echo $ingredient->getAmountOf() ?></td>
-                <td><?php echo $this->tag->linkTo(["ingredients/edit/" . $ingredient->getId(), "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["ingredients/delete/" . $ingredient->getId(), "Delete"]); ?></td>
+                <td><?php echo $dish->getId() ?></td>
+                <td><?php echo $dish->getName() ?></td>
+                <td><?php echo $this->tag->linkTo(["dishes/ingredients/" . $dish->getId(), "Ingredients"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["dishes/edit/" . $dish->getId(), "Edit"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["dishes/delete/" . $dish->getId(), "Delete"]); ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

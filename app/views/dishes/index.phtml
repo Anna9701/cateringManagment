@@ -11,6 +11,9 @@
         <p>
             <?php echo $this->tag->linkTo(["dishes/new", "Create dish"]) ?>
         </p>
+        <p>
+            <?php echo $this->tag->linkTo(["dishes/list", "List all dishes"]) ?>
+        </p>
     </div>
 
 <?php echo $this->getContent() ?>
@@ -35,7 +38,7 @@ echo $this->tag->form(
     <div class="form-group">
         <label for="fieldName" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-            <?php echo $this->tag->textField(["FirstName", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+            <?php echo $this->tag->textField(["Name", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
         </div>
     </div>
 

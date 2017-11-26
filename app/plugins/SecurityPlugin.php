@@ -37,8 +37,8 @@ class SecurityPlugin extends Plugin
 			//Private area resources
 			$privateResources = [
 				'caterings'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'list'],
-				'clients'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete'],
-				'dishes'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'ingredients'],
+				'clients'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'list'],
+				'dishes'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'ingredients', 'list'],
                 'ingredients' => ['new', 'delete', 'edit', 'save']
 			];
 			foreach ($privateResources as $resource => $actions) {
