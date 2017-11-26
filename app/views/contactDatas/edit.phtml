@@ -1,0 +1,61 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous"><?php echo $this->tag->linkTo(["clients", "Back"]) ?></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="page-header">
+    <h1>
+        Edit contact data
+    </h1>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<?php
+echo $this->tag->form(
+    [
+        "contactDatas/save",
+        "autocomplete" => "off",
+        "class" => "form-horizontal"
+    ]
+);
+?>
+
+<div class="form-group">
+    <label for="fieldPhone" class="col-sm-2 control-label">Phone Number</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->textField(["Phone", "size" => 30, "class" => "form-control", "id" => "fieldPhone"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldEmail" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->textField(["Email", "size" => 30, "class" => "form-control", "id" => "fieldEmail"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldFax" class="col-sm-2 control-label">Fax</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->textField(["Fax", "size" => 30, "class" => "form-control", "id" => "fieldFax"]) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->hiddenField("Id") ?>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+        </div>
+    </div>
+
+<?php echo $this->tag->endForm(); ?>

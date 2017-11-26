@@ -145,6 +145,13 @@ class ClientsController extends \Phalcon\Mvc\Controller
         $client->setFirstName($this->request->getPost("FirstName"));
         $client->setLastName($this->request->getPost("LastName"));
 
+        $contactData = new ContactData();
+        $contactData->setPhone($this->request->getPost("Phone"));
+        $contactData->setFax($this->request->getPost("Fax"));
+        $contactData->setEmail($this->request->getPost("Email"));
+
+        $client->ContactData = $contactData;
+
         if (!$client->save()) {
 
             foreach ($client->getMessages() as $message) {
@@ -244,6 +251,7 @@ class ClientsController extends \Phalcon\Mvc\Controller
             return;
         }
 
+        $client->getContactData()->delete();
         if (!$client->delete()) {
 
             foreach ($client->getMessages() as $message) {
