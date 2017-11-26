@@ -98,6 +98,27 @@ class ClientsController extends \Phalcon\Mvc\Controller
     }
 
     /**
+     * Displays clients details
+     * @param string $Id
+     */
+    public function detailsAction($Id) {
+        if (!$this->request->isPost()) {
+
+            $client = Clients::findFirst($Id);
+            if (!$client) {
+                $this->flash->error("Client was not found");
+
+                $this->dispatcher->forward([
+                    'controller' => "clients",
+                    'action' => 'index'
+                ]);
+
+                return;
+            }
+        }
+    }
+
+    /**
      * Edits a client
      *
      * @param string $Id
@@ -118,12 +139,17 @@ class ClientsController extends \Phalcon\Mvc\Controller
                 return;
             }
 
+            $contactData = $client->getContactData()[0];
+
+
             $this->view->Id = $client->getId();
 
             $this->tag->setDefault("Id", $client->getId());
             $this->tag->setDefault("FirstName", $client->getFirstName());
             $this->tag->setDefault("LastName", $client->getLastName());
-
+            $this->tag->setDefault("Phone", $contactData->getPhone());
+            $this->tag->setDefault("Fax", $contactData->getFax());
+            $this->tag->setDefault("Email", $contactData->getEmail());
         }
     }
 
@@ -207,11 +233,18 @@ class ClientsController extends \Phalcon\Mvc\Controller
 
         $client->setFirstName($this->request->getPost("FirstName"));
         $client->setLastName($this->request->getPost("LastName"));
+        $contactData = $client->getContactData()[0];
+        $contactData->setPhone($this->request->getPost("Phone"));
+        $contactData->setFax($this->request->getPost("Fax"));
+        $contactData->setEmail($this->request->getPost("Email"));
 
 
-        if (!$client->save()) {
+        if (!$client->save() || !$contactData->save()) {
 
             foreach ($client->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+            foreach ($contactData->getMessages() as $message) {
                 $this->flash->error($message);
             }
 

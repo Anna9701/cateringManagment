@@ -14,12 +14,13 @@
 <?php echo $this->getContent(); ?>
 
 <div class="row">
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-striped table-hover table-inverse table-responsive">
+        <thead class="thead-inverse">
         <tr>
-            <th>Id</th>
+            <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -30,6 +31,7 @@
                 <td><?php echo $client->getId() ?></td>
                 <td><?php echo $client->getFirstName() ?></td>
                 <td><?php echo $client->getLastName() ?></td>
+                <td><?php echo $this->tag->linkTo(["clients/details/" . $client->getId(), "Details"]); ?></td>
                 <td><?php echo $this->tag->linkTo(["clients/edit/" . $client->getId(), "Edit"]); ?></td>
                 <td><?php echo $this->tag->linkTo(["clients/delete/" . $client->getId(), "Delete"]); ?></td>
             </tr>

@@ -37,10 +37,9 @@ class SecurityPlugin extends Plugin
 			//Private area resources
 			$privateResources = [
 				'caterings'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'list'],
-				'clients'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'list'],
+				'clients'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'details', 'list'],
 				'dishes'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'ingredients', 'list'],
-                'ingredients' => ['new', 'add', 'delete', 'edit', 'save', 'create'],
-                'contactDatas' => ['new', 'edit', 'save']
+                'ingredients' => ['new', 'add', 'delete', 'edit', 'save', 'create']
 			];
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);
