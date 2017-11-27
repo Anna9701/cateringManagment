@@ -15,14 +15,14 @@
 <div class="form-group">
     <label for="fieldPrice" class="col-sm-2 control-label">Price</label>
     <div class="col-sm-3">
-        <?php echo $this->tag->textField(["Price", "size" => 30, "class" => "form-control", "id" => "fieldPrice"]) ?>
+        <?php echo $this->tag->numericField(["Price", "min" => 1, "class" => "form-control", "id" => "fieldPrice"]) ?>
     </div>
 </div>
 
 <div class="form-group">
     <label for="fieldAmountOf" class="col-sm-2 control-label">Amount of</label>
     <div class="col-sm-3">
-        <?php echo $this->tag->textField(["AmountOf", "size" => 30, "class" => "form-control", "id" => "fieldAmountOf"]) ?>
+        <?php echo $this->tag->numericField(["AmountOf", "min" => 1, "class" => "form-control", "id" => "fieldAmountOf"]) ?>
     </div>
 </div>
 

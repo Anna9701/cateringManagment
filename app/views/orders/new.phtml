@@ -1,0 +1,64 @@
+<?php echo $this->getContent(); ?>
+    <div class="page-header">
+        <h1>
+            Order
+        </h1>
+    </div>
+
+<?php
+echo $this->tag->form(
+    [
+        "orders/create",
+        "autocomplete" => "off",
+        "class" => "form-horizontal"
+    ]
+);
+?>
+
+<div class="form-group">
+    <label for="fieldPriority" class="col-sm-2 control-label">Priority</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->numericField(["Priority", "min" => 1, "max" => "5",  "class" => "form-control", "id" => "fieldPriority"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldPeople" class="col-sm-2 control-label">Amount of people</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->numericField(["People", "min" => 1, "class" => "form-control", "id" => "fieldPeople"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldCost" class="col-sm-2 control-label">Cost</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->numericField(["Cost", "min" => 1, "class" => "form-control", "id" => "fieldCost"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldInvoice" class="col-sm-2 control-label">Invoice</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->checkField(["Invoice", "value" => "Y", "class" => "form-control", "id" => "fieldInvoice"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldPayed" class="col-sm-2 control-label">Payed up</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->checkField(["Payed", "value" => "Y", "class" => "form-control", "id" => "fieldPayed"]) ?>
+    </div>
+</div>
+
+<?php $this->partial("dates/new"); ?>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-5">
+        <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+    </div>
+</div>
+
+
+
+<?php echo $this->tag->hiddenField("CateringId") ?>
+<?php echo $this->tag->endForm(); ?>

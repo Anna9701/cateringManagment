@@ -1,0 +1,77 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+    <div class="row">
+        <nav>
+            <ul class="pager">
+                <li class="previous"><?php echo $this->tag->linkTo(["caterings", "Back"]) ?></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="page-header">
+        <h1>
+            Edit order
+        </h1>
+    </div>
+
+<?php echo $this->getContent(); ?>
+
+<?php
+echo $this->tag->form(
+    [
+        "orders/save",
+        "autocomplete" => "off",
+        "class" => "form-horizontal"
+    ]
+);
+?>
+
+    <div class="form-group">
+        <label for="fieldPriority" class="col-sm-2 control-label">Priority</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->numericField(["Priority", "min" => 1, "max" => "5", "class" => "form-control", "id" => "fieldPriority"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldPeople" class="col-sm-2 control-label">Amount of people</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->numericField(["People", "min" => 1, "class" => "form-control", "id" => "fieldPeople"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldCost" class="col-sm-2 control-label">Cost</label>
+        <div class="col-sm-3">
+            <?php echo $this->tag->numericField(["Cost", "min" => 1, "class" => "form-control", "id" => "fieldCost"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldInvoice" class="col-sm-2 control-label">Invoice</label>
+        <div class="col-sm-3">
+            <?php echo $this->tag->checkField(["Invoice", "value" => "Y", "class" => "form-control", "id" => "fieldInvoice"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fieldPayed" class="col-sm-2 control-label">Payed up</label>
+        <div class="col-sm-3">
+            <?php echo $this->tag->checkField(["Payed", "value" => "Y", "class" => "form-control", "id" => "fieldPayed"]) ?>
+        </div>
+    </div>
+
+<?php $this->partial("dates/new"); ?>
+
+<?php echo $this->tag->hiddenField("Id") ?>
+<?php echo $this->tag->hiddenField("CateringId") ?>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+        </div>
+    </div>
+
+<?php echo $this->tag->endForm(); ?>

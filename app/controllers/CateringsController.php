@@ -258,5 +258,43 @@ class CateringsController extends \Phalcon\Mvc\Controller
             'action' => "index"
         ]);
     }
+
+    /**
+     * Searches for orders
+     * @param string $Id
+     */
+    public function ordersListAction($Id) {
+        $numberPage = 1;
+
+        if (!$this->request->isPost()) {
+
+            $catering = Caterings::findFirst($Id);
+            if (!$catering) {
+                $this->flash->error("Catering was not found");
+
+                $this->dispatcher->forward([
+                    'controller' => "caterings",
+                    'action' => 'index'
+                ]);
+
+                return;
+            }
+        }
+
+
+        $orders = $catering->getOrders();
+
+        if (count($orders) == 0) {
+            $numberPage = 0;
+        }
+
+        $paginator = new Paginator([
+            'data' => $orders,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
+    }
 }
 

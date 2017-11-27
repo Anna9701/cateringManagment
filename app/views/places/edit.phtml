@@ -46,14 +46,14 @@ echo $this->tag->form(
 <div class="form-group">
     <label for="fieldFloor" class="col-sm-2 control-label">Floor</label>
     <div class="col-sm-3">
-        <?php echo $this->tag->textField(["Floor", "size" => 30, "class" => "form-control", "id" => "fieldFloor"]) ?>
+        <?php echo $this->tag->numericField(["Floor", "class" => "form-control", "id" => "fieldFloor"]) ?>
     </div>
 </div>
 
 <div class="form-group">
     <label for="fieldHall" class="col-sm-2 control-label">Hall number</label>
     <div class="col-sm-3">
-        <?php echo $this->tag->textField(["Hall", "size" => 30, "class" => "form-control", "id" => "fieldHall"]) ?>
+        <?php echo $this->tag->numericField(["Hall", "class" => "form-control", "id" => "fieldHall"]) ?>
     </div>
 </div>
 
