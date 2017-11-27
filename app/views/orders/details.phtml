@@ -1,0 +1,104 @@
+<h1>
+    Order details
+</h1></br></br>
+
+<h4>
+    <dl class="dl-horizontal">
+        <dt>Amount of people</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo $order->getAmountOfPeople();
+            ?></dd>
+        <dt>Priority</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo $order->getPriority();
+        ?></dd>
+        <dt>Start time</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo Dates::findFirst($order->getDateId())->getStartTime();
+        ?></dd>
+        <dt>End time</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo Dates::findFirst($order->getDateId())->getEndTime();
+            ?></dd>
+        <dt>Address</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo Places::findFirst($order->getPlaceId())->getAddress();
+        ?></dd>
+        <dt>Postal code</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo Places::findFirst($order->getPlaceId())->getPostalCode();
+        ?></dd>
+        <dt>Floor</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo Places::findFirst($order->getPlaceId())->getFloor();
+        ?></dd>
+        <dt>Hall number</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo Places::findFirst($order->getPlaceId())->getHallNumber();
+        ?></dd>
+        <dt>Cost</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            echo $order->getCost();
+            ?></dd>
+        <dt>Invoice</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            if ($order->getInvoice() == 1)
+                echo "Yes";
+            else
+                echo "No";
+            ?></dd>
+        <dt>Payed up</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            if ($order->getPayedUp() == 1)
+                echo "Yes";
+            else
+                echo "No";
+        ?></dd>
+    </dl>
+    <h2>Client data</h2>
+    <dl class="dl-horizontal">
+        <dt>First Name</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            $client = Clients::findFirst($order->getClientId());
+            echo $client->getFirstName();
+            ?></dd>
+        <dt>Last name</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            $client = Clients::findFirst($order->getClientId());
+            echo $client->getLastName();
+            ?></dd>
+        <dt>Phone</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            $client = Clients::findFirst($order->getClientId());
+            echo $client->getContactData()[0]->getPhone();
+            ?></dd>
+        <dt>Email</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            $client = Clients::findFirst($order->getClientId());
+            echo $client->getContactData()[0]->getEmail();
+            ?></dd>
+        <dt>Fax</dt>
+        <dd><?php
+            $order = Orders::findFirst($this->dispatcher->getParam(0));
+            $client = Clients::findFirst($order->getClientId());
+            echo $client->getContactData()[0]->getFax();
+            ?></dd>
+    </dl>
+</h4>
+<p><?php echo $this->tag->linkTo(["orders/edit/" . Orders::findFirst($this->dispatcher->getParam(0))->getId(), "Edit"]); ?></p>
+<p><?php echo $this->tag->linkTo(["orders/delete/" . Orders::findFirst($this->dispatcher->getParam(0))->getId(), "Delete"]); ?></p>

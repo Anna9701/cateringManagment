@@ -93,6 +93,26 @@ class OrdersController extends \Phalcon\Mvc\Controller
         ]);
     }
 
+    /**
+     * Displays order details
+     * @param string $Id
+     */
+    public function detailsAction($Id) {
+        if (!$this->request->isPost()) {
+
+            $order = Orders::findFirst($Id);
+            if (!$order) {
+                $this->flash->error("Order was not found");
+
+                $this->dispatcher->forward([
+                    'controller' => "caterings",
+                    'action' => 'index'
+                ]);
+
+                return;
+            }
+        }
+    }
 
     /**
      * Edits a order
