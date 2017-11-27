@@ -41,7 +41,7 @@ class SecurityPlugin extends Plugin
 				'dishes'    => ['index', 'search', 'new', 'edit', 'save', 'create', 'delete', 'ingredients', 'list'],
                 'ingredients' => ['new', 'add', 'delete', 'edit', 'save', 'create'],
                 'places' => ['new', 'create', 'delete', 'edit', 'save'],
-                'orders' => ['new', 'create', 'delete', 'edit', 'save']
+                'orders' => ['new', 'create', 'delete', 'edit', 'save', 'choosePlace', 'places']
 			];
 			foreach ($privateResources as $resource => $actions) {
 				$acl->addResource(new Resource($resource), $actions);

@@ -30,6 +30,13 @@ echo $this->tag->form(
 ?>
 
     <div class="form-group">
+        <label for="fieldClient" class="col-sm-2 control-label">Client</label>
+        <div class="col-sm-10">
+            <?php echo $this->tag->select(["Client", Clients::find(), "using" => ["id", "last_name"], "class" => "form-control", "id" => "fieldClient"]) ?>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="fieldPriority" class="col-sm-2 control-label">Priority</label>
         <div class="col-sm-10">
             <?php echo $this->tag->numericField(["Priority", "min" => 1, "max" => "5", "class" => "form-control", "id" => "fieldPriority"]) ?>

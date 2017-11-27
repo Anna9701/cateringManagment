@@ -69,6 +69,8 @@ class OrdersController extends \Phalcon\Mvc\Controller
             $order->setPayedUp(0);
         }
 
+        $order->setClientId($this->request->getPost("Client"));
+
         if (!$order->save()) {
 
             foreach ($order->getMessages() as $message) {
@@ -84,13 +86,13 @@ class OrdersController extends \Phalcon\Mvc\Controller
         }
 
 
-        $this->flash->success("Order was created successfully");
-
         $this->dispatcher->forward([
-            'controller' => "caterings",
-            'action' => 'index'
+            'controller' => "orders",
+            'action' => 'places',
+            'params' => [$order->getId()]
         ]);
     }
+
 
     /**
      * Edits a order
@@ -127,6 +129,7 @@ class OrdersController extends \Phalcon\Mvc\Controller
             $this->view->Id = $order->getId();
 
             $this->tag->setDefault("Id", $order->getId());
+            $this->tag->setDefault("Client", $order->getClientId());
             $this->tag->setDefault("CateringId", $order->getCateringId());
             $this->tag->setDefault("People", $order->getAmountOfPeople());
             $this->tag->setDefault("Cost", $order->getCost());
@@ -205,6 +208,7 @@ class OrdersController extends \Phalcon\Mvc\Controller
         $order->setCateringId($this->request->getPost("CateringId"));
         $date->setStartTime($this->request->getPost("StartTime"));
         $date->setEndTime($this->request->getPost("EndTime"));
+        $order->setClientId($this->request->getPost("Client"));
 
         if (!$date->save()) {
 
@@ -236,13 +240,64 @@ class OrdersController extends \Phalcon\Mvc\Controller
             return;
         }
 
-        $this->flash->success("Order was updated successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "orders",
+            'action' => 'places',
+            'params' => [$order->getId()]
+        ]);
+    }
+
+    public function placesAction($Id) {
+        $this->tag->setDefault("OrderId", $Id);
+    }
+
+    public function choosePlaceAction() {
+        if (!$this->request->isPost()) {
+            $this->dispatcher->forward([
+                'controller' => "caterings",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $order = Orders::findFirst($this->request->getPost("OrderId"));
+        if (!$order) {
+            $this->flash->error("Order was not found");
+
+            $this->dispatcher->forward([
+                'controller' => "caterings",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $order->setPlaceId($this->request->getPost("Place"));
+        if (!$order->save()) {
+
+            foreach ($order->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "caterings",
+                'action' => 'places',
+                'params' => [$order->getId()]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("Success");
 
         $this->dispatcher->forward([
             'controller' => "caterings",
             'action' => 'index'
         ]);
     }
+
 
     /**
      * Deletes a order with date

@@ -19,11 +19,13 @@
     <table class="table table-striped table-hover table-inverse table-responsive">
         <thead class="thead-inverse">
         <tr>
-            <th>Client</th>
-            <th>Address</th>
             <th>Starts</th>
+            <th>Ends</th>
+            <th>Amount of people</th>
             <th>Priority</th>
-            <th></th>
+            <th>Cost</th>
+            <th>Invoice</th>
+            <th>Payed up</th>
             <th></th>
             <th></th>
         </tr>
@@ -31,11 +33,13 @@
         <tbody>
         <?php foreach ($page->items as $order): ?>
             <tr>
-                <td><?php echo Clients::findFirst($order->getClientId())->getLastName() ?></td>
-                <td><?php echo Places::findFirst($order->getPlaceId())->getAddress() ?></td>
                 <td><?php echo Dates::findFirst($order->getDateId())->getStartTime()?></td>
+                <td><?php echo Dates::findFirst($order->getDateId())->getEndTime()?></td>
+                <td><?php echo $order->getAmountOfPeople() ?></td>
                 <td><?php echo $order->getPriority() ?></td>
-                <td><?php echo $this->tag->linkTo(["orders/details/" . $order->getId(), "Details"]); ?></td>
+                <td><?php echo $order->getCost() ?></td>
+                <td><?php if($order->getInvoice() == 1) echo "Yes"; else echo "No"; ?></td>
+                <td><?php if($order->getPayedUp() == 1) echo "Yes"; else echo "No"; ?></td>
                 <td><?php echo $this->tag->linkTo(["orders/edit/" . $order->getId(), "Edit"]); ?></td>
                 <td><?php echo $this->tag->linkTo(["orders/delete/" . $order->getId(), "Delete"]); ?></td>
             </tr>
