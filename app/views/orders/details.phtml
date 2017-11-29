@@ -4,6 +4,10 @@
 
 <h4>
     <dl class="dl-horizontal">
+        <dt></dt>
+        <dd>
+            <?php echo $this->tag->linkTo("/orders/dishOrders/" . Orders::findFirst($this->dispatcher->getParam(0))->getId(), "Ordered dishes"); ?>
+        </dd>
         <dt>Amount of people</dt>
         <dd><?php
             $order = Orders::findFirst($this->dispatcher->getParam(0));
@@ -23,7 +27,7 @@
         <dd><?php
             $order = Orders::findFirst($this->dispatcher->getParam(0));
             echo Dates::findFirst($order->getDateId())->getEndTime();
-            ?></dd>
+        ?></dd>
         <dt>Address</dt>
         <dd><?php
             $order = Orders::findFirst($this->dispatcher->getParam(0));

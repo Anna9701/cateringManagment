@@ -6,6 +6,8 @@
  * Time: 12:30 PM
  */
 
+use Phalcon\Paginator\Adapter\Model as Paginator;
+
 class OrdersController extends \Phalcon\Mvc\Controller
 {
     public function indexAction() {
@@ -91,6 +93,50 @@ class OrdersController extends \Phalcon\Mvc\Controller
             'action' => 'places',
             'params' => [$order->getId()]
         ]);
+    }
+
+    /**
+     * Searches for ordered dishes
+     * @param string $Id
+     */
+    public function dishOrdersAction($Id) {
+        $numberPage = 1;
+        //   $this->session->set("dishId", $Id);
+
+        if (!$this->request->isPost()) {
+
+            $order = Orders::findFirst($Id);
+            if (!$order) {
+                $this->flash->error("Order was not found");
+
+                $this->dispatcher->forward([
+                    'controller' => "clients",
+                    'action' => 'index'
+                ]);
+
+                return;
+            }
+        }
+
+        $dishOrders = DishOrders::find(
+            [
+                "(orderId = :orderId:)",
+                "bind" => [
+                    "orderId"    => $Id,
+                ]
+            ]
+        );
+        if (count($dishOrders) == 0) {
+            $numberPage = 0;
+        }
+
+        $paginator = new Paginator([
+            'data' => $dishOrders,
+            'limit'=> 10,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
     }
 
     /**

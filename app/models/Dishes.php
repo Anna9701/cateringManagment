@@ -19,12 +19,7 @@ class Dishes extends \Phalcon\Mvc\Model
      */
     protected $name;
 
-    /**
-     *
-     * @var integer
-     * @Column(type="integer", length=1, nullable=true)
-     */
-    protected $takeaway;
+
 
     /**
      * Method to set the value of field id
@@ -52,18 +47,7 @@ class Dishes extends \Phalcon\Mvc\Model
         return $this;
     }
 
-    /**
-     * Method to set the value of field takeaway
-     *
-     * @param integer $takeaway
-     * @return $this
-     */
-    public function setTakeaway($takeaway)
-    {
-        $this->takeaway = $takeaway;
 
-        return $this;
-    }
 
     /**
      * Returns the value of field id
@@ -85,15 +69,7 @@ class Dishes extends \Phalcon\Mvc\Model
         return $this->name;
     }
 
-    /**
-     * Returns the value of field takeaway
-     *
-     * @return integer
-     */
-    public function getTakeaway()
-    {
-        return $this->takeaway;
-    }
+
 
     /**
      * Initialize method for model.

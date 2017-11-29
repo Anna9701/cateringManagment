@@ -9,15 +9,41 @@ class DishOrders extends \Phalcon\Mvc\Model
      * @Primary
      * @Column(type="integer", length=11, nullable=false)
      */
+    protected $id;
+
+    /**
+     *
+     * @var integer
+     * @Column(type="integer", length=11, nullable=false)
+     */
     protected $orderId;
 
     /**
      *
      * @var integer
-     * @Primary
      * @Column(type="integer", length=11, nullable=false)
      */
     protected $dishId;
+
+    /**
+     *
+     * @var integer
+     * @Column(type="integer", length=4, nullable=true)
+     */
+    protected $takeaway;
+
+    /**
+     * Method to set the value of field id
+     *
+     * @param integer $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Method to set the value of field orderId
@@ -46,6 +72,29 @@ class DishOrders extends \Phalcon\Mvc\Model
     }
 
     /**
+     * Method to set the value of field takeaway
+     *
+     * @param integer $takeaway
+     * @return $this
+     */
+    public function setTakeaway($takeaway)
+    {
+        $this->takeaway = $takeaway;
+
+        return $this;
+    }
+
+    /**
+     * Returns the value of field id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Returns the value of field orderId
      *
      * @return integer
@@ -63,6 +112,16 @@ class DishOrders extends \Phalcon\Mvc\Model
     public function getDishId()
     {
         return $this->dishId;
+    }
+
+    /**
+     * Returns the value of field takeaway
+     *
+     * @return integer
+     */
+    public function getTakeaway()
+    {
+        return $this->takeaway;
     }
 
     /**
