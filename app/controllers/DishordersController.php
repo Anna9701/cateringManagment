@@ -55,7 +55,7 @@ class DishordersController extends \Phalcon\Mvc\Controller
 
             $this->dispatcher->forward([
                 'controller' => "dishOrders",
-                'action' => 'new'
+                'action' => 'create'
             ]);
 
 
@@ -78,7 +78,7 @@ class DishordersController extends \Phalcon\Mvc\Controller
     {
         if (!$this->request->isPost()) {
 
-            $order = Orders::findFirst($id);
+            $order = DishOrders::findFirst($id);
             if (!$order) {
                 $this->flash->error("Order was not found");
 
@@ -90,38 +90,116 @@ class DishordersController extends \Phalcon\Mvc\Controller
                 return;
             }
 
-            $date = Dates::findFirst($order->getDateId());
-            if (!$date) {
-                $this->flash->error("Date was not found");
-
-                $this->dispatcher->forward([
-                    'controller' => "caterings",
-                    'action' => 'index'
-                ]);
-
-                return;
-            }
-
-            $this->view->Id = $order->getId();
+           $this->view->Id = $order->getId();
 
             $this->tag->setDefault("Id", $order->getId());
-            $this->tag->setDefault("Client", $order->getClientId());
-            $this->tag->setDefault("CateringId", $order->getCateringId());
-            $this->tag->setDefault("People", $order->getAmountOfPeople());
-            $this->tag->setDefault("Cost", $order->getCost());
-            $this->tag->setDefault("Priority", $order->getPriority());
-            $this->tag->setDefault("StartTime", $date->getStartTime());
-            $this->tag->setDefault("EndTime", $date->getEndTime());
-            $this->tag->setDefault("DateId", $date->getId());
+            $this->tag->setDefault("OrderId", $order->getOrderId());
+            $this->tag->setDefault("Dish", $order->getDishId());
 
-            if ($order->getPayedUp() == 1) {
-                $this->tag->setDefault("Payed", "Y");
+            if ($order->getTakeaway() == 1) {
+                $this->tag->setDefault("Takeaway", "Y");
             }
-            if ($order->getInvoice() == 1) {
-                $this->tag->setDefault("Invoice", "Y");
-            }
-
 
         }
+    }
+
+    /**
+     * Saves a dish order edited
+     *
+     */
+    public function saveAction()
+    {
+        if (!$this->request->isPost()) {
+            $this->dispatcher->forward([
+                'controller' => "caterings",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $Id = $this->request->getPost("Id");
+        $order = DishOrders::findFirst($Id);
+
+        if (!$order) {
+            $this->flash->error("Order does not exist " . $Id);
+
+            $this->dispatcher->forward([
+                'controller' => "caterings",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $order->setDishId($this->request->getPost("Dish"));
+        if ($this->request->getPost("Takeaway") == 'Y') {
+            $order->setTakeaway(1);
+        } else {
+            $order->setTakeaway(0);
+        }
+
+        if (!$order->save()) {
+
+            foreach ($order->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "dishorders",
+                'action' => 'edit',
+                'params' => [$order->getId()]
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("Order was updated successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "caterings",
+            'action' => 'index'
+        ]);
+    }
+
+    /**
+     * Deletes a dish order
+     *
+     * @param string $Id
+     */
+    public function deleteAction($Id)
+    {
+        $order = DishOrders::findFirst($Id);
+        if (!$order) {
+            $this->flash->error("Order was not found");
+
+            $this->dispatcher->forward([
+                'controller' => "caterings",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        if (!$order->delete()) {
+
+            foreach ($order->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "caterings",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("Order was deleted successfully");
+
+        $this->dispatcher->forward([
+            'controller' => "caterings",
+            'action' => "index"
+        ]);
     }
 }
